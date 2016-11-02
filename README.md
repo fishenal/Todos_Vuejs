@@ -1,6 +1,9 @@
-# todos_vue in 100 lines
+# simply-todolist-vuejs
 
-> a vue.js todolist demo project
+> 使用vuejs2.0 搭建的极简的todolist
+
+用到的插件： vue-localstorage
+https://github.com/pinguinjkeke/vue-local-storage
 
 ## Build Setup
 
@@ -11,10 +14,7 @@ npm install
 # serve with hot reload at localhost:8080
 npm run dev
 
+# build for production with minification
+npm run build
 ```
-## Base On
-https://github.com/vuejs/vue
 
-https://github.com/vuejs/vue/tree/dev/examples/todomvc
-
-https://github.com/vuejs/vue-cli
