@@ -2,7 +2,7 @@
   <li class="todo-line">
     <h3 @mouseenter="showDeleteTag" @mouseleave="hideDeleteTag">
       <input type="checkbox" @click="itemCheck(item)">
-      <p class="item-label" v-bind:class="{ "line-through": checked }">{{ index + 1 }} . {{ label }} </p>
+      <p class="item-label" v-bind:class="{ 'line-through': checked }">{{ index + 1 }} . {{ label  }} </p>
       <p class="item-status" v-if="checked">finished</p>
       <p class="item-delete" v-if="isShowDeleteTag" @click="deleteClick">Delete</p>
     </h3>
