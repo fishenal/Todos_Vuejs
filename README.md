@@ -8,9 +8,6 @@
   - 使用vue-localstorage插件 https://github.com/pinguinjkeke/vue-local-storage
 
 
-## 路由及大型项目的demo参考：（更新中）
-  https://github.com/fishenal/Vuejs-SalePlatform
-  
 ## 安装
 
 ``` bash
