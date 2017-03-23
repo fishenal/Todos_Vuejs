@@ -1,10 +1,10 @@
 <template>
   <div id="app">
     <h2>Simply todolist - vuejs</h2>
-    <input id="add-input" v-model="newTodo" @keyup.enter="addTodo" placeholder="do what?"/>
+    <input id="add-input" v-model="todoText" @keyup.enter="addTodo" placeholder="do what?"/>
     <ul>
       <!-- 循环插入todo组件, 并动态传入label index,监听自定义方法delete-->
-      <todo v-for="(label, index) in todoList" :label="label" :index="index" @delete="deleteTodo"></todo>
+      <todo v-for="(todoItem, index) in todoList" :todoItem="todoItem" :index="index"></todo>
     </ul>
   </div>
 </template>
@@ -14,33 +14,25 @@ import Todo from './components/todo'
 export default {
   name: 'todoList',
   components: {
-    //声明todo组件作为列表的每一行
     Todo
   },
   data () {
     return {
-      newTodo: '',// 新增项输入
-      todoList: []//保存列表的属性
+      todoText: ''
     }
   },
-  watch: {
-    todoList (newList) {
-      // 监听组件列表数据并将其保存到localstorage中
-      this.$localStorage.set('vueTodoList', newList)
+  computed: {
+    todoList () {
+      return this.$store.getters.todos
     }
-  },
-  mounted () {
-    // 组件渲染完毕从localstorage中取出列表数据
-    this.todoList = this.$localStorage.get('vueTodoList')
   },
   methods: {
     addTodo () {
-      this.todoList.push(this.newTodo)
-      this.newTodo = ''
+      this.$store.commit('addTodo', this.todoText)
+      this.todoText = ''
     },
     deleteTodo (index) {
-      // 删除指定项列表
-      this.todoList.splice(index, 1)
+      this.$store.commit('deleteTodo', index)
     }
   }
 }
