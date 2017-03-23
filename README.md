@@ -7,9 +7,6 @@
   - vuejs升级到 2.0版本， 去掉2.0不支持的属性和方法
   - 使用vue-localstorage插件 https://github.com/pinguinjkeke/vue-local-storage
 
-
-## 路由及大型项目的demo参考：（更新中）
-  https://github.com/fishenal/Vuejs-SalePlatform
   
 ## 安装
 
