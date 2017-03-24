@@ -2,12 +2,33 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 Vue.use(Vuex)
 
-import VueLocalStorage from 'vue-localstorage'
-Vue.use(VueLocalStorage)
+import { initializeApp as init, database as db} from 'firebase'
+
+const config = {
+    apiKey: "",
+    authDomain: "",
+    databaseURL: "",
+    storageBucket: "",
+    messagingSenderId: ""
+}
+
+init(config)
 
 const STORAGE_KEY = 'todos-vuejs'
+const FBRef = db().ref(STORAGE_KEY)
+function createFirebaseDb (fbRef) {
+  return store => {
+    fbRef.on('value', snapshot => {
+        store.commit('receiveData', snapshot.val())
+    })
+    store.subscribe((mutation, state) => {
+        fbRef.set(state.todos)
+    })
+  }
+}
+
 const state = {
-    todos: JSON.parse(window.localStorage.getItem(STORAGE_KEY) || '[]')
+    todos: []
 }
 const getters = {
     todos:  state => state.todos
@@ -24,16 +45,16 @@ const mutations = {
     },
     toggleTodo (state, index) {
         state.todos[index].done = !state.todos[index].done
+    },
+    receiveData (state, data) {
+        state.todos = data
     }
 }
-const localStoragePlugin = store => {
-  store.subscribe((mutation, { todos }) => {
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(todos))
-  })
-}
+
+const storagePlugin = createFirebaseDb(FBRef)
 export default new Vuex.Store({
   state,
   getters,
   mutations,
-  plugins: [localStoragePlugin]
+  plugins: [storagePlugin]
 })
