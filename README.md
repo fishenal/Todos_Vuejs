@@ -2,6 +2,9 @@
 
 > 使用vuejs2.0 搭建的极简的todolist
 
+# vuex version
+https://github.com/fishenal/Todos_Vuejs/tree/withVuex
+
 ## 跟视频教程中的差异：
   - 将每一行todo作为一个组件进行循环
   - vuejs升级到 2.0版本， 去掉2.0不支持的属性和方法
