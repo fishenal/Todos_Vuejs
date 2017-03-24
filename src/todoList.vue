@@ -3,7 +3,6 @@
     <h2>Simply todolist - vuejs</h2>
     <input id="add-input" v-model="todoText" @keyup.enter="addTodo" placeholder="do what?"/>
     <ul>
-      <!-- 循环插入todo组件, 并动态传入label index,监听自定义方法delete-->
       <todo v-for="(todoItem, index) in todoList" :todoItem="todoItem" :index="index"></todo>
     </ul>
   </div>

@@ -3,8 +3,8 @@
     <h3>
       <input type="checkbox" @click="itemCheck(item)">
       <p class="item-label" v-bind:class="{ 'line-through': checked }">{{ index + 1 }} . {{ todoItem.text  }} </p>
-      <p class="item-status" v-if="checked">{{ todoItem.done ? 'finished' : '' }}</p>
-      <p class="item-delete" v-if="isShowDeleteTag" @click="deleteClick">Delete</p>
+      <p class="item-status" v-if="todoItem.done">finished</p>
+      <p class="item-delete" @click="deleteClick">Delete</p>
     </h3>
   </li>
 </template>
@@ -17,19 +17,12 @@ export default {
   },
   data () {
     return {
-      isShowDeleteTag: false,
       checked: false
     }
   },
   methods: {
     itemCheck () {
-      this.checked = !this.checked
-    },
-    showDeleteTag () {
-      this.isShowDeleteTag = true
-    },
-    hideDeleteTag () {
-      this.isShowDeleteTag = false
+      this.$store.commit('toggleTodo', this.index)
     },
     deleteClick () {
       this.$store.commit('deleteTodo', this.index)
@@ -50,7 +43,7 @@ export default {
   font-size: 12px;
 }
 .item-delete {
-  display: inline;
+  display: none;
   text-decoration: underline;
   font-size: 12px;
   color: gray;
@@ -64,5 +57,8 @@ export default {
 }
 h3:hover {
   text-decoration: line-through;
+}
+h3:hover .item-delete {
+  display: inline;
 }
 </style>
